@@ -1,0 +1,6 @@
+# Debian 10 buster
+# All mirrors: https://www.debian.org/mirror/list
+# We use tsinghua for the present
+deb https://mirrors.tuna.tsinghua.edu.cn/debian buster main
+deb http://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main
+deb https://mirrors.tuna.tsinghua.edu.cn/debian buster-updates main

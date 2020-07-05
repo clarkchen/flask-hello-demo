@@ -1,7 +1,6 @@
 FROM python:3.6-slim
 
 WORKDIR /app/src
-
 ADD requirements /app/requirements
 
 # 更新 pip 和 apt 源地址
@@ -13,4 +12,9 @@ RUN apt-get update \
     && export PYCURL_SSL_LIBRARY=openssl \
     && pip3 install --no-cache-dir -r /app/requirements/base.txt
 ADD src /app/src
+ADD scripts /app/scripts
 RUN mkdir -p /app/src/logs
+#WORKDIR /app/src
+#ENTRYPOINT ["python3", "app.py"]
+#ENTRYPOINT ["ls", "/app"]
+

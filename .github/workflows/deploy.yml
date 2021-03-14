@@ -27,5 +27,5 @@ jobs:
         password:  ${{ secrets.SSH_USER_PWD }}
         port: 22
         script: |
-          docker container stop $(docker container ls|awk '/flask/{print $1}')
+          docker container stop $(docker container ls|awk '/flask/{print $1}');
           docker run -p 5000:5000 clarkchenme/flask-hello -d

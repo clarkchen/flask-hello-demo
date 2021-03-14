@@ -23,3 +23,7 @@ docker-compose build
 ```
 docker-compose up
 ```
+## docker run
+```
+docker run -p 5000:5000 clarkchenme/flask-hello
+```

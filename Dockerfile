@@ -10,7 +10,12 @@ COPY docker/sources.list /etc/apt/sources.list
 RUN apt-get update \
     && apt-get install -y libmariadb-dev gcc\
     && export PYCURL_SSL_LIBRARY=openssl \
-    && pip3 install --no-cache-dir -r /app/requirements/prod.txt
+    && pip3 install --no-cache-dir -r /app/requirements/base.txt
+
+RUN if [ "$FLASK_ENV" = "development" ] ; \
+    then  pip3 install --no-cache-dir -r /app/requirements/base.txt ;\
+    else pip3 install --no-cache-dir -r /app/requirements/prod.txt ; \
+    fi
 
 COPY src /app/src
 

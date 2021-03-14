@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  flask-hello-test:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "5000:5000"
+    environment: 
+      FLASK_APP: app.py
+      FLASK_RUN_PORT: 5000
+      # 开发模式配置
+      FLASK_ENV: development
+    working_dir: /app/src
+    volumes:
+      - .:/app
+    entrypoint: ['flask', 'run','-h', "0.0.0.0"]
+

@@ -17,14 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: test
-      run: echo "$env:HOST"
+      run: echo  ${{ secrets.HOST }}
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
-        host: "$env:HOST"
-        username: "$env:SSH_USER"  
-        password: "$env:SSH_USER_PWD" 
+        host:  ${{ secrets.HOST }}
+        username:  ${{ secrets.SSH_USER }} 
+        password:  ${{ secrets.SSH_USER_PWD }}
         port: 22
         script: |
           docker container stop $(docker container ls|awk '/flask/{print $1}')

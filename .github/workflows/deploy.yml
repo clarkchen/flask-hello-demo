@@ -8,7 +8,6 @@ on:
     types: 
       - completed
 
-environment: Dev
 
 env:
   # TODO: Change variable to your image's name.
@@ -16,6 +15,7 @@ env:
 jobs:
   build:
     name: Build
+    environment: Product
     runs-on: ubuntu-latest
     steps:
     - name: test

@@ -11,7 +11,9 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: clarkchenme/flask-hello
+  USER_IMAGE_NAME: clarkchenme/flask-hello
+  IMAGE_NAME: flask-hello
+
 jobs:
   build:
     name: Build
@@ -29,7 +31,8 @@ jobs:
         password:  ${{ secrets.SSH_USER_PWD }}
         port: 22
         script: |
-          docker container stop $(docker container ls|awk '/$IMAGE_NAME/{print $1}');
-          docker pull $IMAGE_NAME
-          docker run -p 5000:5000 -d $IMAGE_NAME
- 
+          echo $IMAGE_NAME
+          docker container stop $(docker container ls|awk "/$IMAGE_NAME/{print $1}")
+          docker pull $USER_IMAGE_NAME
+          docker run -p 5000:5000 -d $USER_IMAGE_NAME
+

@@ -59,20 +59,20 @@ jobs:
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      # deplooy
-      - name: test
-        run: echo  ${{ secrets.HOST }}
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # deplooy
+  #     - name: test
+  #       run: echo  ${{ secrets.HOST }}
 
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host:  ${{ secrets.HOST }}
-          username:  ${{ secrets.SSH_USER }} 
-          password:  ${{ secrets.SSH_USER_PWD }}
-          port: 22
-          script: |
-            docker container stop $(docker container ls|awk '/flask/{print $1}')
-            docker run -p 5000:5000 clarkchenme/flask-hello -d
+  #     - name: executing remote ssh commands using password
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host:  ${{ secrets.HOST }}
+  #         username:  ${{ secrets.SSH_USER }} 
+  #         password:  ${{ secrets.SSH_USER_PWD }}
+  #         port: 22
+  #         script: |
+  #           docker container stop $(docker container ls|awk '/flask/{print $1}')
+  #           docker run -p 5000:5000 clarkchenme/flask-hello -d

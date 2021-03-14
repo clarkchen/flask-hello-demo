@@ -4,16 +4,21 @@ services:
   flask-hello-test:
     build:
       context: .
+      args: 
+        ENV_LANG: CN
+        COMPOSE_MODE: DEBUG
       dockerfile: ./Dockerfile
+
     ports:
-      - "5000:5000"
-    environment: 
-      FLASK_APP: app.py
-      FLASK_RUN_PORT: 5000
-      # 开发模式配置
-      FLASK_ENV: development
+      - "5001:5001"
+    env_file: ./envs/dev.env
+    # environment: 
+    #   FLASK_APP: app.py
+    #   FLASK_RUN_PORT: 5001
+    #   FLASK_ENV: development
+
     working_dir: /app/src
     volumes:
       - .:/app
     entrypoint: ['flask', 'run','-h', "0.0.0.0"]
-
+    tty: true

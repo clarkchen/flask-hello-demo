@@ -25,5 +25,8 @@ docker-compose up
 ```
 ## docker run
 ```
-docker run -p 5000:5000 clarkchenme/flask-hello
+docker run -p 5000:5000 -d clarkchenme/flask-hello
+
+docker container stop $(docker container ls|awk '/flask/{print $1}')
+
 ```

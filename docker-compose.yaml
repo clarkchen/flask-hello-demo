@@ -5,10 +5,14 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    ports:
-      - "5000:5000"
+      args: 
+        ENV_LANG: CN
+        COMPOSE_MODE: PROD
+    env_file: ./envs/prod.env
     environment: 
       FLASK_RUN_PORT: 5000
+    ports:
+      - "5000:5000"
     working_dir: /app/src
     volumes:
       - .:/app

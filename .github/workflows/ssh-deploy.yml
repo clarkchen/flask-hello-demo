@@ -1,0 +1,27 @@
+name: remote docker run
+
+on:
+  workflow_run:
+    # Publish `master` as Docker `latest` image.
+    workflows: ["Docker"]
+    branches: [master]
+    types: 
+      - completed
+
+env:
+  # TODO: Change variable to your image's name.
+  IMAGE_NAME: flask-hello
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_USER_PWD }}
+        port: 22
+        script: docker run -p 5000:5000 clarkchenme/flask-hello

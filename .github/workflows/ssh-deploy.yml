@@ -1,4 +1,4 @@
-name: remote docker run
+name: Deploy
 
 on:
   workflow_run:
@@ -7,8 +7,6 @@ on:
     branches: [master]
     types: 
       - completed
-
-
 
 env:
   # TODO: Change variable to your image's name.
@@ -25,7 +23,7 @@ jobs:
       with: # Set the secret as an input
         host_name: ${{ secrets.HOST }}
       env: # Or as an environment variable
-          host_name: ${{ secrets.HOST }}
+        host_name: ${{ secrets.HOST }}
   
     - name: test2
       run: echo $host_name

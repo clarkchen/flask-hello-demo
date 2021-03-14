@@ -36,6 +36,7 @@ jobs:
   # See also https://docs.docker.com/docker-hub/builds/
   docker:
     runs-on: ubuntu-latest
+    needs: test 
     steps:
       -
         name: Set up QEMU

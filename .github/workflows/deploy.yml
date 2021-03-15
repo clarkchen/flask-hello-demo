@@ -37,8 +37,8 @@ jobs:
         script: |
           echo $IMAGE_NAME
           docker container stop $CONTAINER_NAME
+          docker container rm $CONTAINER_NAME 
           docker pull $IMAGE_NAME
           docker rmi -f $(docker images|awk '/none/{print $3}')
-          docker container rm $CONTAINER_NAME 
           docker run -p 5000:5000 -d  --name $CONTAINER_NAME $IMAGE_NAME
 

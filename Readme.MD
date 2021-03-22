@@ -30,3 +30,14 @@ docker run -p 5000:5000 -d clarkchenme/flask-hello
 docker container stop $(docker container ls|awk '/flask/{print $1}')
 
 ```
+
+# 异常
+## 清空所有None
+```
+docker rmi -f $(docker images|awk '/none/{print $3}')
+```
+
+## 清空所有Container
+```
+docker container rm $(docker container ls -a |awk '{print $1}'|grep -v CONTAINER)
+```

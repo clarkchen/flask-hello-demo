@@ -17,21 +17,25 @@ RUN if [ "$ENV_LANG" = "CN" ] ; \
     mv /etc/apt/sources.list_cn /etc/apt/sources.list;\
     else echo 'not hit'; \
     fi
+RUN apt-get update
 
-RUN apt-get update \
-    && apt-get install -y libmariadb-dev gcc\
+RUN apt-get install -y libmariadb-dev gcc\
     && export PYCURL_SSL_LIBRARY=openssl 
     # && pip3 install --no-cache-dir -r /app/requirements/base.txt
 
 
 RUN if [ "$COMPOSE_MODE" = "DEBUG" ] ; \
-    then  pip3 install --no-cache-dir -r /app/requirements/base.txt ;\
-    else pip3 install --no-cache-dir -r /app/requirements/prod.txt ; \
+    then \
+        pip3 install --no-cache-dir -r /app/requirements/base.txt ;\
+    else \
+        pip3 install --no-cache-dir -r /app/requirements/prod.txt ; \
     fi
 
 RUN echo $FLASK_RUN_PORT
 
 COPY src /app/src
+
+COPY etc /app/src/etc
 
 CMD ["flask", "run", "-h","0.0.0.0"]
 # CMD [ "/bin/bash"]

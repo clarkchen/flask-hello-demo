@@ -14,7 +14,7 @@ services:
     ports:
       - "5000:5000"
     working_dir: /app/src
-    volumes:
-      - .:/app
-    entrypoint: ['gunicorn', '-c', 'etc/gunicorn_config.py', "app:app"]
-
+#    volumes:
+#      - .:/app
+    entrypoint: ['gunicorn', '-c', './etc/gunicorn_config.py', "app:app"]
+#    entrypoint: ['flask', 'run','-h', "0.0.0.0"]

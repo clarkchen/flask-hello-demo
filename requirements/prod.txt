@@ -1,4 +1,4 @@
 -r base.txt
-gunicorn
-gevent
-python-decouple
+gunicorn==25.1.0
+gevent==25.9.1
+python-decouple==3.8
